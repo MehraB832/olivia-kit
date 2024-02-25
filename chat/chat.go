@@ -8,6 +8,8 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+// ======================================= //
+
 // A Client will connect to the Olivia's server using the Token the Information and the Locale
 type Client struct {
 	Information *map[string]interface{}
@@ -32,6 +34,9 @@ type ResponseMessage struct {
 	Tag         string                 `json:"tag"`
 	Information map[string]interface{} `json:"information"`
 }
+
+// ======================================= //
+// ======================================= //
 
 // NewClient creates a new Client by generating a random token, and setting english as the
 // default langauge.
@@ -66,10 +71,16 @@ func NewClient(host string, ssl bool, information *map[string]interface{}) (clie
 	return
 }
 
+// ======================================= //
+// ======================================= //
+
 // Close closes the websocket connection
 func (client *Client) Close() {
 	client.Connection.Close()
 }
+
+// ======================================= //
+// ======================================= //
 
 // SendMessage sends the given content to the websocket of Olivia and returns her response with
 // an error.
@@ -107,6 +118,9 @@ func (client *Client) SendMessage(content string) (ResponseMessage, error) {
 	return response, nil
 }
 
+// ======================================= //
+// ======================================= //
+
 // handshake performs the handshake request to the websocket
 func (client *Client) handshake() error {
 	// Marshal the RequestMessage with type 0
@@ -128,6 +142,9 @@ func (client *Client) handshake() error {
 	return nil
 }
 
+// ======================================= //
+// ======================================= //
+
 // generateToken returns a random token of 50 characters
 func generateToken() string {
 	b := make([]byte, 50)
@@ -135,3 +152,6 @@ func generateToken() string {
 
 	return fmt.Sprintf("%x", b)
 }
+
+// ======================================= //
+// ======================================= //
